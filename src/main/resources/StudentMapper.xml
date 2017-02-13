@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.StudentMapper">
+
+
+    <select id="findOneById" parameterType="int" resultMap="result">
+        select * from students where id=#{id}
+    </select>
+
+    <select id="findBySomeThing" parameterType="com.domain.Student" resultMap="result">
+        select * from students where id=#{id}
+        <if test="userName != null">
+            and userName=#{userName}
+        </if>
+        <if test="age != null">
+            and age = #{age}
+        </if>
+
+    </select>
+
+
+    <!-- 自定义返回结果集 -->
+    <resultMap id="result" type="com.domain.Student">
+        <id property="id" column="id"></id>
+        <result property="userName" column="userName"></result>
+        <result property="age" column="age"></result>
+    </resultMap>
+
+
+</mapper>
